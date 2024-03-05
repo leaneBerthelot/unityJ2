@@ -1,20 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class PlatformScroller : MonoBehaviour {
-    private GameObject gameState;
+public class Scroller : MonoBehaviour {
+    private GameObject _gameState;
 
-    void Start() {
-        gameState = GameObject.Find("GameState");
+    public void Start() {
+        _gameState = GameObject.Find("GameState");
     }
 
-    void OnBecameInvisible() {
+    public void OnBecameInvisible() {
         Destroy(gameObject);
     }
-    void Update() {
-        transform.Translate(Vector3.left * gameState.GetComponent<Utils>().GetSpeed() * Time.deltaTime);
+
+    public void Update() {
+        transform.Translate(Vector3.left * _gameState.GetComponent<Utils>().GetSpeed() * Time.deltaTime);
     }
 }

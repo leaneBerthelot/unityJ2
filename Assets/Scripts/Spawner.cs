@@ -1,30 +1,27 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlatformSpawner : MonoBehaviour
-{
+public class Spawner : MonoBehaviour {
     public GameObject collectible;
-    private GameObject gameState;
-    void Start() {
-        gameState = GameObject.Find("GameState");
+    private GameObject _gameState;
+
+    public void Start() {
+        _gameState = GameObject.Find("GameState");
     }
 
-    void OnTriggerExit(Collider other) {
-        if(other.tag == "Collectible") {
+    public void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Collectible")) {
             return;
         }
         
-        int height = Random.Range(0, 3);
-        int score = gameState.GetComponent<Utils>().IncrementScore();
+        var height = Random.Range(0f, 2.5f);
 
-        if (score % 5 == 0) {
-            gameState.GetComponent<Utils>().IncrementSpeed();
+        if (_gameState.GetComponent<Utils>().GetScore() % 5 == 0) {
+            _gameState.GetComponent<Utils>().IncrementSpeed();
         }
-        Instantiate(collectible, new Vector3(25, height + 2f, 10), Quaternion.identity);
+
+        Instantiate(collectible, new Vector3(27, height + 1f, 10), Quaternion.identity);
         Instantiate(other.GameObject(), new Vector3(17, height, 10), Quaternion.identity);
     }
 }
