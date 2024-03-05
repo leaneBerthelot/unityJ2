@@ -40,7 +40,10 @@ public class Jump : MonoBehaviour
 
     void OnTriggerEnter(Collider otherObject)
     {
-        resetJump();
+        if (otherObject.tag == "Platform")
+        {
+            resetJump();
+        }
     }
 
     void resetJump()

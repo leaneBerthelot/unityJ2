@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class PlatformSpawner : MonoBehaviour
 {
+    public GameObject collectible;
     private GameObject gameState;
     void Start() {
         gameState = GameObject.Find("GameState");
@@ -23,7 +24,7 @@ public class PlatformSpawner : MonoBehaviour
         if (score % 5 == 0) {
             gameState.GetComponent<Utils>().IncrementSpeed();
         }
-        Instantiate(GameObject.FindGameObjectsWithTag("Collectible")[0], new Vector3(25, height + 2f, 10), Quaternion.identity);
+        Instantiate(collectible, new Vector3(25, height + 2f, 10), Quaternion.identity);
         Instantiate(other.GameObject(), new Vector3(17, height, 10), Quaternion.identity);
     }
 }
